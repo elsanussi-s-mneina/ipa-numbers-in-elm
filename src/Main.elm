@@ -63,11 +63,12 @@ ipaCharactersListToNumbers charList =
     [] -> []
     (' '::restOfChars) -> [' '] ++ ipaCharactersListToNumbers restOfChars
     (char::restOfChars) -> 
-       let firstPart = char
+       let firstPart : List Char
+           firstPart = char
                      |> UnicodeToIPANumber.unicodeToNumber
                      |> String.fromInt
                      |> String.toList
-        in firstPart ++ ipaCharactersListToNumbers restOfChars 
+        in firstPart ++ [' '] ++ ipaCharactersListToNumbers restOfChars 
 
 update : Msg -> Model -> Model
 update msg model =
