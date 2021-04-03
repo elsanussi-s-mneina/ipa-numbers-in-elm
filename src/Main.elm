@@ -48,28 +48,40 @@ type Msg
   = ChangeInIPAChars String | ChangeInIPANumbers String
 
 ipaNumbersToCharacters : String -> String
-ipaNumbersToCharacters x = x -- To be implemented.
+ipaNumbersToCharacters numbers = numbers -- To be implemented.
 
 ipaCharactersToNumbers : String -> String
-ipaCharactersToNumbers x = String.fromList (ipaCharactersListToNumbers (String.toList x))
+ipaCharactersToNumbers characters =
+        characters 
+        |> String.toList 
+        |> ipaCharactersListToNumbers
+        |> String.fromList
 
 ipaCharactersListToNumbers : List Char -> List Char
 ipaCharactersListToNumbers charList = 
   case charList of
     [] -> []
     (' '::restOfChars) -> [' '] ++ ipaCharactersListToNumbers restOfChars
-    (char::restOfChars) ->  (String.toList (String.fromInt (UnicodeToIPANumber.unicodeToNumber char))) ++ ipaCharactersListToNumbers restOfChars 
+    (char::restOfChars) -> 
+       let firstPart = char
+                     |> UnicodeToIPANumber.unicodeToNumber
+                     |> String.fromInt
+                     |> String.toList
+        in firstPart ++ ipaCharactersListToNumbers restOfChars 
 
 update : Msg -> Model -> Model
 update msg model =
   case msg of
     ChangeInIPAChars newContent ->
-            {model | 
-                    ipaCharactersContent = newContent  -- Allows normal input to text field. 
-                    , ipaNumbersContent = ipaCharactersToNumbers newContent }
+            { model 
+            |  ipaCharactersContent = newContent  -- Allows normal input to text field. 
+            , ipaNumbersContent = ipaCharactersToNumbers newContent
+            }
     ChangeInIPANumbers newContent ->
-            {model | ipaNumbersContent = newContent -- Allow normal input 
-                   , ipaCharactersContent = ipaNumbersToCharacters newContent }
+            {model 
+            | ipaNumbersContent = newContent -- Allow normal input 
+            , ipaCharactersContent = ipaNumbersToCharacters newContent
+            }
 
 view : Model -> Html Msg
 view model =  div []
