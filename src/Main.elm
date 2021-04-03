@@ -1,18 +1,29 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, Attribute, div, h1, input, span, text)
-import Html.Attributes exposing (class, placeholder, value)
+import Html exposing (Html, Attribute, div, h1, input, label, span, text)
+import Html.Attributes exposing (class, for, id, placeholder, value)
 import Html.Events exposing (onInput)
 
 inputTextArea : Model -> Html Msg
 inputTextArea model = 
-           input [ placeholder "IPA Numbers", value model.ipaNumbersContent, onInput ChangeInIPANumbers] []
+        let inputId = "ipaNumbersInput"
+        in
+        div []
+        [
+          label [for inputId] [text "IPA Numbers"]
+        , input [id inputId,  placeholder "IPA Numbers", value model.ipaNumbersContent, onInput ChangeInIPANumbers] [] ]
+        
 
 outputTextArea : Model -> Html Msg
 outputTextArea model =
-           input [ placeholder "IPA Characters", value model.ipaCharactersContent, onInput ChangeInIPAChars] []
-
+  let inputId = "ipaCharacterInput"
+  in
+  div []
+  [
+    label [for inputId] [text "IPA Characters"]
+  , input [ placeholder "IPA Characters", value model.ipaCharactersContent, onInput ChangeInIPAChars] []
+  ]
 -- MAIN
 
 main = Browser.sandbox { init = init, update = update, view = view }
