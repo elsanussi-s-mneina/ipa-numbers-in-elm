@@ -4,6 +4,10 @@ import Browser
 import Html exposing (Html, Attribute, div, h1, input, label, span, text)
 import Html.Attributes exposing (class, for, id, placeholder, value)
 import Html.Events exposing (onInput)
+import IPAConstants.IPANumbers
+import IPAConstants.IPAUnicodeConstants
+import IPANumberToUnicode
+import UnicodeToIPANumber
 
 inputTextArea : Model -> Html Msg
 inputTextArea model = 
@@ -47,7 +51,14 @@ ipaNumbersToCharacters : String -> String
 ipaNumbersToCharacters x = x -- To be implemented.
 
 ipaCharactersToNumbers : String -> String
-ipaCharactersToNumbers x = x -- To be implemented.
+ipaCharactersToNumbers x = String.fromList (ipaCharactersListToNumbers (String.toList x))
+
+ipaCharactersListToNumbers : List Char -> List Char
+ipaCharactersListToNumbers charList = 
+  case charList of
+    [] -> []
+    (' '::restOfChars) -> [' '] ++ ipaCharactersListToNumbers restOfChars
+    (char::restOfChars) ->  (String.toList (String.fromInt (UnicodeToIPANumber.unicodeToNumber char))) ++ ipaCharactersListToNumbers restOfChars 
 
 update : Msg -> Model -> Model
 update msg model =
