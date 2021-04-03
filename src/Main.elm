@@ -60,8 +60,13 @@ ipaCharactersToNumbers characters =
 ipaCharactersListToNumbers : List Char -> List Char
 ipaCharactersListToNumbers charList = 
   case charList of
+    -- Base case: when the list is empty, the result is empty.
     [] -> []
+
+    -- When the current character is a space, put a space on the list.
     (' '::restOfChars) -> [' '] ++ ipaCharactersListToNumbers restOfChars
+
+    -- Otherwise, attempt to convert the character to an IPA number.
     (char::restOfChars) -> 
        let firstPart : List Char
            firstPart = char
