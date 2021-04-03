@@ -4,6 +4,9 @@ This will be programmed in the Elm programming language, and will run on a web b
 
 ## History
 This project was created by Elsanussi S. Mneina on April 3rd, 2021.
+This is based on on an earlier project at  https://github.com/elsanussi-s-mneina/ipa-numbers-in-haskell
 
 ## Current Status
-Nothing is implemented. Nothing is ready.
+A draft of the graphical user interface is ready.
+Conversion from IPA characters to numbers is implemented, and working from the web page.
+ 
