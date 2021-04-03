@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, Attribute, div, input, span, text)
+import Html exposing (Html, Attribute, div, h1, input, span, text)
 import Html.Attributes exposing (class, placeholder, value)
 import Html.Events exposing (onInput)
 
@@ -51,8 +51,8 @@ update msg model =
 
 view : Model -> Html Msg
 view model =  div []
-       [
-           inputTextArea model
+       [   h1 [] [text "IPA Number to IPA Character Convertor"]
+           , inputTextArea model
            , outputTextArea model
            , span [class "welcome-message"] [text "Programmed by Elsanussi Mneina, 2021"]
        ]
