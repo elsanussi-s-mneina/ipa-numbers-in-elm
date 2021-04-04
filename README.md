@@ -7,6 +7,15 @@ This project was created by Elsanussi S. Mneina on April 3rd, 2021.
 This is based on on an earlier project at  https://github.com/elsanussi-s-mneina/ipa-numbers-in-haskell
 
 ## Current Status
-A draft of the graphical user interface is ready.
-Conversion from IPA characters to numbers is implemented, and working from the web page.
- 
+- A draft of the graphical user interface is ready.
+- Conversion from IPA characters to numbers is implemented, and working from the web page.
+- Conversion from numbers to IPA Characters is implemented, and working form the web page.
+
+I still need to:
+- figure out how to deal with spaces in the text.
+- make user interface nicer
+  - make input text area better
+  - include introduction
+  - include reference chart or table of numbers
+- write unit tests
+

@@ -47,8 +47,19 @@ init =
 type Msg
   = ChangeInIPAChars String | ChangeInIPANumbers String
 
+parseNumbers : String -> List Int
+parseNumbers numbersString =
+   let tokens = String.words numbersString
+       convertToInt : String -> Int
+       convertToInt x = Maybe.withDefault (floor 0) (String.toInt x)
+   in List.map convertToInt tokens
+
 ipaNumbersToCharacters : String -> String
-ipaNumbersToCharacters numbers = numbers -- To be implemented.
+ipaNumbersToCharacters numbers = 
+   let numbersList = parseNumbers numbers
+   in
+        List.map IPANumberToUnicode.numberToUnicode numbersList
+        |> String.fromList
 
 ipaCharactersToNumbers : String -> String
 ipaCharactersToNumbers characters =
