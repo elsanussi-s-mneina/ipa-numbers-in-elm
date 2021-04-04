@@ -24,3 +24,16 @@ I still need to:
   - include reference chart or table of numbers
 - write unit tests
 
+
+## How to develop.
+### Prerequisites
+- Elm compiler
+- Web browser
+
+## How to run locally
+Run the following command:
+`elm reactor`
+
+## How to produce index.html file.
+Run the following command: 
+`elm make src/Main.elm`
